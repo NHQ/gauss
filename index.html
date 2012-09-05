@@ -1,0 +1,644 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Gauss by stackd</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Gauss</h1>
+        <p>JavaScript statistics, analytics, and set library - Node.js and web browser ready</p>
+
+        <p class="view"><a href="https://github.com/stackd/gauss">View the Project on GitHub <small>stackd/gauss</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/stackd/gauss/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/stackd/gauss/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/stackd/gauss">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>Gauss</h1>
+
+<p><a href="http://travis-ci.org/stackd/gauss"><img src="https://secure.travis-ci.org/stackd/gauss.png" alt="Build Status"></a></p>
+
+<blockquote>
+<p>JavaScript statistics, analytics, and set library - <a href="http://nodejs.org/">Node.js</a> and web browser ready</p>
+</blockquote>
+
+<p>Evented, asynchronous, and fast, <a href="http://nodejs.org/">Node.js</a> is an attractive platform for data mining, statistics, and data analysis.
+<a href="http://en.wikipedia.org/wiki/Carl_Friedrich_Gauss">Gauss</a> makes it <a href="http://fredrickgaloso.me/talks/gauss.html#9">easy to calculate and explore data through JavaScript</a>,
+both on Node.js and within the web browser.</p>
+
+<h2>License</h2>
+
+<p>MIT/X11 - See <a href="http://github.com/stackd/gauss/blob/master/LICENSE">LICENSE</a></p>
+
+<h2>Getting started</h2>
+
+<h3>Install with NPM (Node Package Manager)</h3>
+
+<p>Getting started with Gauss + Node.js is easy:</p>
+
+<pre><code>$ npm install gauss
+</code></pre>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">gauss</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'gauss'</span><span class="p">);</span>
+</pre></div>
+
+<h3>Installing development dependencies and running tests</h3>
+
+<p>To run Gauss's tests you'll need <a href="http://vowsjs.org/">Vows</a>. NPM can automatically resolve this:</p>
+
+<pre><code>$ npm install gauss --devel
+</code></pre>
+
+<p>To invoke the tests:</p>
+
+<pre><code>$ npm test
+</code></pre>
+
+<h3>Using Gauss within a web browser</h3>
+
+<p>Gauss requires support for ECMAScript 5 <code>Object.defineProperties</code>. Compatibility is listed <a href="http://kangax.github.com/es5-compat-table/">here</a>. Download and include <a href="https://raw.github.com/stackd/gauss/master/gauss.min.js">gauss.min.js</a>:</p>
+
+<div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"gauss.min.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+    <span class="kd">var</span> <span class="nx">Vector</span> <span class="o">=</span> <span class="nx">gauss</span><span class="p">.</span><span class="nx">Vector</span><span class="p">,</span>
+        <span class="nx">TimeSeries</span> <span class="o">=</span> <span class="nx">gauss</span><span class="p">.</span><span class="nx">TimeSeries</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">set</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">gauss</span><span class="p">.</span><span class="nx">Vector</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">21</span><span class="p">),</span>
+        <span class="nx">numbers</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vector</span><span class="p">([</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">]),</span>
+        <span class="nx">times</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TimeSeries</span><span class="p">([</span><span class="mi">1315378833000</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">],</span> <span class="p">[</span><span class="mi">1315789015000</span><span class="p">,</span> <span class="mf">7.826</span><span class="p">]);</span>
+<span class="nt">&lt;/script&gt;</span>
+</pre></div>
+
+<h3>Using the REPL console</h3>
+
+<p>To experiment with Gauss or to quickly start a Node.js command-line environment for number crunching, Gauss ships with a lightweight REPL (Read–eval–print loop). Start the REPL with <code>npm start</code> within the source directory, or <code>gauss</code> if installed globally (via <code>npm install -g gauss</code>).</p>
+
+<p>For example, using the <code>help()</code> function and analyzing a data file from the Gauss REPL:</p>
+
+<div class="highlight"><pre><span class="nx">$</span> <span class="nx">gauss</span>
+<span class="nx">gauss</span><span class="o">&gt;</span> <span class="nx">help</span><span class="p">()</span>
+<span class="nx">Gauss</span> <span class="mf">0.2</span><span class="p">.</span><span class="mi">7</span>
+   <span class="cm">/* https://github.com/stackd/gauss#api */</span> 
+   <span class="nx">Functions</span><span class="o">:</span> <span class="nx">print</span><span class="p">,</span> <span class="nx">inspect</span><span class="p">,</span> <span class="nx">cwd</span><span class="p">,</span> <span class="nx">clear</span><span class="p">,</span> <span class="nx">install</span><span class="p">,</span> <span class="nx">uninstall</span><span class="p">,</span> <span class="nx">help</span>
+   <span class="nx">Usage</span><span class="o">:</span>
+     <span class="kd">var</span> <span class="nx">set</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vector</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+     <span class="kd">var</span> <span class="nx">times</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">gauss</span><span class="p">.</span><span class="nx">TimeSeries</span><span class="p">();</span>
+<span class="p">{</span> <span class="nx">version</span><span class="o">:</span> <span class="s1">'0.2.7'</span><span class="p">,</span>
+  <span class="nx">Collection</span><span class="o">:</span> <span class="p">[</span><span class="nb">Function</span><span class="p">],</span>
+  <span class="nx">Vector</span><span class="o">:</span> <span class="p">[</span><span class="nb">Function</span><span class="p">],</span>
+  <span class="nx">TimeSeries</span><span class="o">:</span> <span class="p">[</span><span class="nb">Function</span><span class="p">]</span> <span class="p">}</span>
+<span class="nx">gauss</span><span class="o">&gt;</span> <span class="kd">var</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'fs'</span><span class="p">);</span>
+<span class="nx">gauss</span><span class="o">&gt;</span> <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="s1">'data.txt'</span><span class="p">).</span><span class="nx">toString</span><span class="p">();</span>
+<span class="nx">gauss</span><span class="o">&gt;</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">'\n'</span><span class="p">);</span>
+<span class="p">[</span> <span class="s1">'8'</span><span class="p">,</span>
+  <span class="s1">'6'</span><span class="p">,</span>
+  <span class="s1">'7'</span><span class="p">,</span>
+  <span class="s1">'5'</span><span class="p">,</span>
+  <span class="s1">'3'</span><span class="p">,</span>
+  <span class="s1">'0'</span><span class="p">,</span>
+  <span class="s1">'9'</span> <span class="p">]</span>
+<span class="nx">gauss</span><span class="o">&gt;</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">line</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">line</span><span class="p">)</span> <span class="p">});</span>
+<span class="nx">gauss</span><span class="o">&gt;</span> <span class="kd">var</span> <span class="nx">set</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vector</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="nx">gauss</span><span class="o">&gt;</span> <span class="nx">set</span><span class="p">.</span><span class="nx">mean</span><span class="p">()</span>
+<span class="mf">5.428571428571429</span>
+</pre></div>
+
+<h2>API</h2>
+
+<p>Gauss has methods for univariate (Vector) and time series (TimeSeries) analysis. We're constantly working on adding more functions, adding multivariate statistics, and we encourage additions to the library. Accuracy is a primary concern. If Gauss is returning incorrect results, <a href="https://github.com/stackd/gauss/issues">please submit an issue</a> and/or <a href="https://github.com/stackd/gauss#fork_box">submit a patch</a>!</p>
+
+<h3>Instantiation</h3>
+
+<div class="highlight"><pre><span class="c1">// List of numbers</span>
+<span class="kd">var</span> <span class="nx">set</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">gauss</span><span class="p">.</span><span class="nx">Vector</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">21</span><span class="p">);</span>
+<span class="c1">// From a regular Array</span>
+<span class="kd">var</span> <span class="nx">numbers</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">gauss</span><span class="p">.</span><span class="nx">Vector</span><span class="p">([</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">]);</span>
+<span class="c1">// Convert an Array to a Vector with helper method toVector()</span>
+<span class="kd">var</span> <span class="nx">vanilla</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">chocolate</span> <span class="o">=</span> <span class="nx">vanilla</span><span class="p">.</span><span class="nx">toVector</span><span class="p">();</span>
+<span class="c1">// After instantiation, Gauss objects can be conveniently used like any Array</span>
+<span class="nx">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="nx">set</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>
+</pre></div>
+
+<p><em>Note: To prevent unintended scope/prototype pollution, Gauss versions after 0.2.3 have <a href="https://github.com/stackd/gauss/issues/6">removed support for monkey patching</a> the native Array data type.
+Use the .toArray() method of any Gauss object to a convert to a vanilla Array. Gauss adds a toVector() convenience method to the Array prototype to facilitate converting to Vectors.</em></p>
+
+<h3>Callbacks and method chaining</h3>
+
+<p>All of Gauss's methods accept an <em>optional</em> <a href="http://en.wikipedia.org/wiki/Callback_(computer_programming)">callback</a>:</p>
+
+<div class="highlight"><pre><span class="nx">set</span><span class="p">.</span><span class="nx">min</span><span class="p">();</span>
+<span class="nx">set</span><span class="p">.</span><span class="nx">min</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">result</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="cm">/* Do more things with the minimum*/</span>
+<span class="p">});</span>
+</pre></div>
+
+<p>In addition, for methods that return another Vector, method chaining makes it easy to perform calculations that flow through each other:</p>
+
+<div class="highlight"><pre><span class="nx">set</span><span class="p">.</span><span class="nx">quantile</span><span class="p">(</span><span class="mi">4</span><span class="p">).</span><span class="nx">stdev</span><span class="p">();</span> <span class="c1">// Find the standard deviation of data set's quartiles</span>
+</pre></div>
+
+<p>Finally, you can mix and match both callbacks and chaining:</p>
+
+<div class="highlight"><pre><span class="nx">set</span><span class="p">.</span><span class="nx">quantile</span><span class="p">(</span><span class="mi">4</span><span class="p">).</span><span class="nx">stdev</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">stdev</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">stdev</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="cm">/* Do something awesome */</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+
+<h3>Collection</h3>
+
+<h4>Collection.indexBy</h4>
+
+<pre><code>.indexBy(predicate, callback)
+</code></pre>
+
+<p>Returns the first index of an element that matches a condition.</p>
+
+<h4>Collection.indicesOf</h4>
+
+<pre><code>.indicesOf(element, callback)
+</code></pre>
+
+<p>Returns the indices of all elements that match a value.</p>
+
+<h4>Collection.indicesBy</h4>
+
+<pre><code>.indicesBy(predicate, callback)
+</code></pre>
+
+<p>Returns all indices of an element that match a condition.</p>
+
+<h4>Collection.lastIndexBy</h4>
+
+<pre><code>.lastIndexBy(predicate, callback)
+</code></pre>
+
+<p>Returns the last index of an element that matches a condition.</p>
+
+<h4>Collection.find</h4>
+
+<pre><code>.find(predicate, callback)
+</code></pre>
+
+<p>Returns all the elements that match a condition.</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">people</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">gauss</span><span class="p">.</span><span class="nx">Collection</span><span class="p">(</span>
+  <span class="p">{</span> <span class="nx">firstname</span><span class="o">:</span> <span class="s1">'John'</span><span class="p">,</span> <span class="nx">lastname</span><span class="o">:</span> <span class="s1">'Smith'</span> <span class="p">},</span>
+  <span class="p">{</span> <span class="nx">firstname</span><span class="o">:</span> <span class="s1">'Jane'</span><span class="p">,</span> <span class="nx">lastname</span><span class="o">:</span> <span class="s1">'Doe'</span> <span class="p">},</span>
+  <span class="p">{</span> <span class="nx">firstname</span><span class="o">:</span> <span class="s1">'Mike'</span><span class="p">,</span> <span class="nx">lastname</span><span class="o">:</span> <span class="s1">'Smith'</span> <span class="p">},</span>
+  <span class="p">{</span> <span class="nx">firstname</span><span class="o">:</span> <span class="s1">'Susan'</span><span class="p">,</span> <span class="nx">lastname</span><span class="o">:</span> <span class="s1">'Baker'</span> <span class="p">}</span>
+<span class="p">);</span>
+<span class="c1">// Using a predicate Function</span>
+<span class="nx">people</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">e</span><span class="p">.</span><span class="nx">firstname</span> <span class="o">===</span> <span class="s1">'Jane'</span> <span class="p">});</span>
+<span class="o">&gt;</span> <span class="p">[{</span> <span class="nx">firstname</span><span class="o">:</span> <span class="s1">'Jane'</span><span class="p">,</span> <span class="nx">lastname</span><span class="o">:</span> <span class="s1">'Doe'</span> <span class="p">}]</span>
+<span class="c1">// Using a condition Object</span>
+<span class="nx">people</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span> <span class="nx">lastname</span><span class="o">:</span> <span class="s1">'Smith'</span> <span class="p">});</span>
+<span class="o">&gt;</span> <span class="p">[{</span> <span class="nx">firstname</span><span class="o">:</span> <span class="s1">'John'</span><span class="p">,</span> <span class="nx">lastname</span><span class="o">:</span> <span class="s1">'Smith'</span> <span class="p">},</span>
+  <span class="p">{</span> <span class="nx">firstname</span><span class="o">:</span> <span class="s1">'Mike'</span><span class="p">,</span> <span class="nx">lastname</span><span class="o">:</span> <span class="s1">'Smith'</span> <span class="p">}]</span>
+</pre></div>
+
+<h4>Collection.findOne</h4>
+
+<pre><code>.findOne(predicate, callback)
+</code></pre>
+
+<p>Returns the first element that matches a condition.</p>
+
+<div class="highlight"><pre><span class="c1">// Using a predicate Function</span>
+<span class="nx">people</span><span class="p">.</span><span class="nx">findOne</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">e</span><span class="p">.</span><span class="nx">firstname</span> <span class="o">===</span> <span class="s1">'Jane'</span> <span class="p">});</span>
+<span class="o">&gt;</span> <span class="p">{</span> <span class="nx">firstname</span><span class="o">:</span> <span class="s1">'Jane'</span><span class="p">,</span> <span class="nx">lastname</span><span class="o">:</span> <span class="s1">'Doe'</span> <span class="p">}</span>
+<span class="c1">// Using a condition Object</span>
+<span class="nx">people</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span> <span class="nx">lastname</span><span class="o">:</span> <span class="s1">'Smith'</span> <span class="p">});</span>
+<span class="o">&gt;</span> <span class="p">{</span> <span class="nx">firstname</span><span class="o">:</span> <span class="s1">'John'</span><span class="p">,</span> <span class="nx">lastname</span><span class="o">:</span> <span class="s1">'Smith'</span> <span class="p">}</span>
+</pre></div>
+
+<h4>Collection.mode</h4>
+
+<pre><code>.mode(callback)
+</code></pre>
+
+<p>Returns the value(s) that occur the most frequently in a data set. If there is a tie, returns a Collection of values.</p>
+
+<h4>Collection.frequency</h4>
+
+<pre><code>.frequency(element, callback)
+</code></pre>
+
+<p>Returns the number of occurrences of value within a data set.</p>
+
+<h4>Collection.distribution</h4>
+
+<pre><code>.distribution(format, callback)
+</code></pre>
+
+<p>Returns an <code>Object</code> containing the (frequency) distribution of values within the Collection. Default format: <code>absolute</code>; <code>relative</code> returns ratio of occurrences and total number of values in a data set. </p>
+
+<div class="highlight"><pre><span class="nx">set</span><span class="p">.</span><span class="nx">distribution</span><span class="p">();</span>
+<span class="o">&gt;</span> <span class="p">{</span>
+    <span class="mi">1</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="mi">2</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="mi">3</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="mi">5</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="mi">21</span><span class="o">:</span> <span class="mi">1</span>
+  <span class="p">}</span>
+<span class="nx">set</span><span class="p">.</span><span class="nx">distribution</span><span class="p">(</span><span class="s1">'relative'</span><span class="p">);</span>
+<span class="o">&gt;</span> <span class="p">{</span>
+    <span class="mi">1</span><span class="o">:</span> <span class="mf">0.2</span><span class="p">,</span>
+    <span class="mi">2</span><span class="o">:</span> <span class="mf">0.2</span><span class="p">,</span>
+    <span class="mi">3</span><span class="o">:</span> <span class="mf">0.2</span><span class="p">,</span>
+    <span class="mi">5</span><span class="o">:</span> <span class="mf">0.2</span><span class="p">,</span>
+    <span class="mi">21</span><span class="o">:</span> <span class="mf">0.2</span>
+  <span class="p">}</span>
+</pre></div>
+
+<h4>Collection.append</h4>
+
+<pre><code>.append(that, callback)
+</code></pre>
+
+<p>Return Collection appended with an Array.</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">numbers</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Collection</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">).</span><span class="nx">append</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]);</span>
+<span class="o">&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</pre></div>
+
+<h3>Vector</h3>
+
+<h4>Vector.min</h4>
+
+<pre><code>.min(callback)
+</code></pre>
+
+<p>Returns the smallest number.</p>
+
+<h4>Vector.max</h4>
+
+<pre><code>.max(callback)
+</code></pre>
+
+<p>Returns the largest number.</p>
+
+<h4>Vector.equal</h4>
+
+<pre><code>.equal(callback)
+</code></pre>
+
+<p>Returns <code>true</code> or <code>false</code> if Vector values are equal to another Vector or Array.</p>
+
+<h4>Vector.sum</h4>
+
+<pre><code>.sum(callback)
+</code></pre>
+
+<p>Returns the sum of the numbers.</p>
+
+<h4>Vector.product</h4>
+
+<pre><code>.product(callback)
+</code></pre>
+
+<p>Returns the product of the numbers.</p>
+
+<h4>Vector.push</h4>
+
+<pre><code>.push(number1, ..., numberN, callback)
+</code></pre>
+
+<p>Returns the updated Vector with one or more elements appended to the end; performs/maintains streaming calculations.</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">Vector</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'gauss'</span><span class="p">).</span><span class="nx">Vector</span><span class="p">,</span>
+    <span class="nx">digits</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vector</span><span class="p">();</span>
+<span class="c1">// Push some numbers in</span>
+<span class="nx">digits</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+<span class="o">&gt;</span> <span class="mi">3</span>
+<span class="nx">digits</span><span class="p">.</span><span class="nx">sum</span><span class="p">();</span>
+<span class="o">&gt;</span> <span class="mi">6</span>
+<span class="c1">// Keep on pushing; sum is updated as numbers are pushed</span>
+ <span class="nx">digits</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span>
+<span class="o">&gt;</span> <span class="mi">6</span>
+</pre></div>
+
+<p><em>Note: Streaming calculations like sum(), product(), variance(), and functions dependent on streaming capable functions benefit from O(1) amortized performance.</em></p>
+
+<h4>Vector.range</h4>
+
+<pre><code>.range(callback)
+</code></pre>
+
+<p>Returns the difference between the largest and smallest value in a data set.</p>
+
+<h4>Vector.mean</h4>
+
+<pre><code>.mean(callback)
+</code></pre>
+
+<p>Returns the arithmetic mean.</p>
+
+<h4>Vector.gmean</h4>
+
+<pre><code>.gmean(callback)
+</code></pre>
+
+<p>Returns the geometric mean.</p>
+
+<h4>Vector.hmean</h4>
+
+<pre><code>.hmean(callback)
+</code></pre>
+
+<p>Returns the harmonic mean.</p>
+
+<h4>Vector.qmean</h4>
+
+<pre><code>.qmean(callback)
+</code></pre>
+
+<p>Returns the quadratic mean (RMS, root mean square).</p>
+
+<h4>Vector.median</h4>
+
+<pre><code>.median(callback)
+</code></pre>
+
+<p>Returns the median. If there are an even amount of numbers in the data set, returns the arithmetic mean of the two middle values.</p>
+
+<h4>Vector.mode</h4>
+
+<pre><code>.mode(callback)
+</code></pre>
+
+<p>Returns the value(s) that occur the most frequently in a data set. If there is a tie, returns a Vector of values.</p>
+
+<h4>Vector.variance</h4>
+
+<pre><code>.variance(callback)
+</code></pre>
+
+<p>Returns a measure of how far a set of numbers are spread out from each other.</p>
+
+<h4>Vector.stdev</h4>
+
+<pre><code>.stdev(percent, callback)
+</code></pre>
+
+<p>Returns the standard deviation of data set. If a percent is given, returns the standard deviation with respect to a percentile of the population.</p>
+
+<h4>Vector.frequency</h4>
+
+<pre><code>.frequency(value, callback)
+</code></pre>
+
+<p>Returns the number of occurrences of value within a data set.</p>
+
+<h4>Vector.percentile</h4>
+
+<pre><code>.percentile(value, callback)
+</code></pre>
+
+<p>Returns the value that below which a certain percent of observations fall within the data set.</p>
+
+<h4>Vector.density</h4>
+
+<pre><code>.density(percent, callback)
+</code></pre>
+
+<p>Returns a Vector which is a percentile subset of values occurring within a data set.</p>
+
+<h4>Vector.distribution</h4>
+
+<pre><code>.distribution(format, callback)
+</code></pre>
+
+<p>Returns an <code>Object</code> containing the (frequency) distribution of values within the Vector. Default format: <code>absolute</code>; <code>relative</code> returns ratio of occurrences and total number of values in a data set. </p>
+
+<div class="highlight"><pre><span class="nx">set</span><span class="p">.</span><span class="nx">distribution</span><span class="p">();</span>
+<span class="o">&gt;</span> <span class="p">{</span>
+    <span class="mi">1</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="mi">2</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="mi">3</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="mi">5</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="mi">21</span><span class="o">:</span> <span class="mi">1</span>
+  <span class="p">}</span>
+<span class="nx">set</span><span class="p">.</span><span class="nx">distribution</span><span class="p">(</span><span class="s1">'relative'</span><span class="p">);</span>
+<span class="o">&gt;</span> <span class="p">{</span>
+    <span class="mi">1</span><span class="o">:</span> <span class="mf">0.2</span><span class="p">,</span>
+    <span class="mi">2</span><span class="o">:</span> <span class="mf">0.2</span><span class="p">,</span>
+    <span class="mi">3</span><span class="o">:</span> <span class="mf">0.2</span><span class="p">,</span>
+    <span class="mi">5</span><span class="o">:</span> <span class="mf">0.2</span><span class="p">,</span>
+    <span class="mi">21</span><span class="o">:</span> <span class="mf">0.2</span>
+  <span class="p">}</span>
+</pre></div>
+
+<h4>Vector.quantile</h4>
+
+<pre><code>.quantile(quantity, callback)
+</code></pre>
+
+<p>Returns a Vector of values that divide a frequency distribution into equal groups, each containing the same fraction of the total data set.</p>
+
+<div class="highlight"><pre><span class="nx">set</span><span class="p">.</span><span class="nx">quantile</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span> <span class="c1">// Quartiles</span>
+</pre></div>
+
+<h4>Vector.sma</h4>
+
+<pre><code>.sma(period, callback)
+</code></pre>
+
+<p>Returns a Vector of the simple moving average (SMA); unweighted means of the previous n data points. <code>period</code> is the length of observation window for moving average.</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">prices</span> <span class="o">=</span> <span class="p">[</span><span class="mf">22.2734</span><span class="p">,</span> <span class="mf">22.194</span><span class="p">,</span> <span class="mf">22.0847</span><span class="p">,</span> <span class="mf">22.1741</span><span class="p">,</span> <span class="mf">22.184</span><span class="p">,</span> <span class="mf">22.1344</span><span class="p">,</span>
+<span class="mf">22.2337</span><span class="p">,</span> <span class="mf">22.4323</span><span class="p">,</span> <span class="mf">22.2436</span><span class="p">,</span> <span class="mf">22.2933</span><span class="p">,</span> <span class="mf">22.1542</span><span class="p">,</span> <span class="mf">22.3926</span><span class="p">,</span>
+<span class="mf">22.3816</span><span class="p">,</span> <span class="mf">22.6109</span><span class="p">,</span> <span class="mf">23.3558</span><span class="p">,</span> <span class="mf">24.0519</span><span class="p">,</span> <span class="mf">23.753</span><span class="p">,</span> <span class="mf">23.8324</span><span class="p">,</span>
+<span class="mf">23.9516</span><span class="p">,</span> <span class="mf">23.6338</span><span class="p">,</span> <span class="mf">23.8225</span><span class="p">,</span> <span class="mf">23.8722</span><span class="p">,</span> <span class="mf">23.6537</span><span class="p">,</span> <span class="mf">23.187</span><span class="p">,</span>
+<span class="mf">23.0976</span><span class="p">,</span> <span class="mf">23.326</span><span class="p">,</span> <span class="mf">22.6805</span><span class="p">,</span> <span class="mf">23.0976</span><span class="p">,</span> <span class="mf">22.4025</span><span class="p">,</span> <span class="mf">22.1725</span><span class="p">];</span>
+
+<span class="nx">prices</span> <span class="o">=</span> <span class="nx">prices</span><span class="p">.</span><span class="nx">toVector</span><span class="p">();</span>
+
+<span class="c1">// 10-period SMA</span>
+<span class="nx">prices</span><span class="p">.</span><span class="nx">sma</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="o">&gt;</span> <span class="p">[</span> <span class="mf">22.22475</span><span class="p">,</span> <span class="mf">22.21283</span><span class="p">,</span> <span class="mf">22.232689999999998</span><span class="p">,</span>
+    <span class="mf">22.26238</span><span class="p">,</span> <span class="mf">22.30606</span><span class="p">,</span> <span class="mf">22.42324</span><span class="p">,</span>
+    <span class="mf">22.61499</span><span class="p">,</span> <span class="mf">22.76692</span><span class="p">,</span> <span class="mf">22.90693</span><span class="p">,</span>
+    <span class="mf">23.07773</span><span class="p">,</span> <span class="mf">23.211779999999997</span><span class="p">,</span> <span class="mf">23.37861</span><span class="p">,</span>
+    <span class="mf">23.52657</span><span class="p">,</span> <span class="mf">23.653779999999998</span><span class="p">,</span> <span class="mf">23.711389999999998</span><span class="p">,</span>
+    <span class="mf">23.68557</span><span class="p">,</span> <span class="mf">23.61298</span><span class="p">,</span> <span class="mf">23.50573</span><span class="p">,</span>
+    <span class="mf">23.43225</span><span class="p">,</span> <span class="mf">23.27734</span><span class="p">,</span> <span class="mf">23.13121</span>
+  <span class="p">]</span>
+</pre></div>
+
+<h4>Vector.ema</h4>
+
+<pre><code>.ema(options, callback)
+</code></pre>
+
+<p>Returns a Vector of the exponential moving average (EMA); weighted means of the previous n data points.
+<code>options</code> is</p>
+
+<ul>
+<li>Number Length of the observation window for moving average, using the default smoothing ratio (2 / period + 1) <strong>or</strong>
+</li>
+<li>Object.period Length of the observation window for moving average</li>
+<li>Object.ratio Function returning a Number to be used as smoothing ratio</li>
+</ul><div class="highlight"><pre><span class="c1">// 10-period EMA</span>
+<span class="nx">prices</span><span class="p">.</span><span class="nx">ema</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="o">&gt;</span> <span class="p">[</span> <span class="mf">22.22475</span><span class="p">,</span> <span class="mf">22.21192272727273</span><span class="p">,</span> <span class="mf">22.24477314049587</span><span class="p">,</span>
+    <span class="mf">22.269650751314803</span><span class="p">,</span> <span class="mf">22.331696069257568</span><span class="p">,</span> <span class="mf">22.51789678393801</span><span class="p">,</span>
+    <span class="mf">22.796806459585646</span><span class="p">,</span> <span class="mf">22.970659830570074</span><span class="p">,</span> <span class="mf">23.127339861375514</span><span class="p">,</span>
+    <span class="mf">23.27720534112542</span><span class="p">,</span> <span class="mf">23.34204073364807</span><span class="p">,</span> <span class="mf">23.429396963893875</span><span class="p">,</span>
+    <span class="mf">23.509906606822263</span><span class="p">,</span> <span class="mf">23.536050860127308</span><span class="p">,</span> <span class="mf">23.47258706737689</span><span class="p">,</span>
+    <span class="mf">23.40440760058109</span><span class="p">,</span> <span class="mf">23.390151673202713</span><span class="p">,</span> <span class="mf">23.261124096256765</span><span class="p">,</span>
+    <span class="mf">23.231392442391897</span><span class="p">,</span> <span class="mf">23.080684725593372</span><span class="p">,</span> <span class="mf">22.91556023003094</span>
+  <span class="p">]</span>
+
+<span class="c1">// 10-period Welles Wilder EMA</span>
+<span class="nx">prices</span><span class="p">.</span><span class="nx">ema</span><span class="p">({</span>
+    <span class="nx">period</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="nx">ratio</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="nx">n</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">});</span>
+<span class="o">&gt;</span> <span class="p">[</span> <span class="mf">22.22475</span><span class="p">,</span> <span class="mf">22.217695</span><span class="p">,</span> <span class="mf">22.2351855</span><span class="p">,</span>
+    <span class="mf">22.24982695</span><span class="p">,</span> <span class="mf">22.285934255</span><span class="p">,</span> <span class="mf">22.3929208295</span><span class="p">,</span>
+    <span class="mf">22.55881874655</span><span class="p">,</span> <span class="mf">22.678236871895</span><span class="p">,</span> <span class="mf">22.793653184705498</span><span class="p">,</span>
+    <span class="mf">22.90944786623495</span><span class="p">,</span> <span class="mf">22.981883079611453</span><span class="p">,</span> <span class="mf">23.065944771650308</span><span class="p">,</span>
+    <span class="mf">23.146570294485276</span><span class="p">,</span> <span class="mf">23.19728326503675</span><span class="p">,</span> <span class="mf">23.196254938533073</span><span class="p">,</span>
+    <span class="mf">23.186389444679765</span><span class="p">,</span> <span class="mf">23.20035050021179</span><span class="p">,</span> <span class="mf">23.14836545019061</span><span class="p">,</span>
+    <span class="mf">23.14328890517155</span><span class="p">,</span> <span class="mf">23.069210014654395</span><span class="p">,</span> <span class="mf">22.979539013188955</span>
+  <span class="p">]</span>
+</pre></div>
+
+<h4>Vector.delta</h4>
+
+<pre><code>.delta(callback)
+</code></pre>
+
+<p>Returns a Vector of values containing the sequential difference between numbers in a sequence.</p>
+
+<h4>Vector.extend</h4>
+
+<pre><code>.extend(methods, callback)
+</code></pre>
+
+<p>Returns a Vector extended with named functions.</p>
+
+<p>Within the function body, <code>this</code> is attached to the Vector being extended and the function may take zero or more arguments.
+To maintain chainability, return <code>this</code>.</p>
+
+<div class="highlight"><pre><span class="c1">// Instantiate a new Vector with extensions</span>
+<span class="kd">var</span> <span class="nx">set</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vector</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span>
+    <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="mi">12</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="mi">19</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">13</span>
+<span class="p">).</span><span class="nx">extend</span><span class="p">({</span>
+    <span class="nx">head</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="p">},</span>
+    <span class="nx">tail</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+<span class="nx">set</span><span class="p">.</span><span class="nx">head</span><span class="p">()</span>
+<span class="o">&gt;</span> <span class="mi">14</span>
+<span class="nx">set</span><span class="p">.</span><span class="nx">tail</span><span class="p">()</span>
+<span class="o">&gt;</span> <span class="p">[</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span>
+    <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="mi">12</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="mi">19</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">13</span>
+  <span class="p">]</span>
+<span class="c1">// Extend instantiated objects</span>
+<span class="nx">set</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+    <span class="c1">// Distribution of deltas</span>
+    <span class="nx">ddist</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">format</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">delta</span><span class="p">().</span><span class="nx">distribution</span><span class="p">(</span><span class="nx">format</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+<span class="nx">set</span><span class="p">.</span><span class="nx">ddist</span><span class="p">(</span><span class="s1">'relative'</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="p">{</span> 
+    <span class="s1">'1'</span><span class="o">:</span> <span class="mf">0.10526315789473684</span><span class="p">,</span>
+    <span class="s1">'2'</span><span class="o">:</span> <span class="mf">0.05263157894736842</span><span class="p">,</span>
+    <span class="s1">'3'</span><span class="o">:</span> <span class="mf">0.10526315789473684</span><span class="p">,</span>
+    <span class="s1">'4'</span><span class="o">:</span> <span class="mf">0.10526315789473684</span><span class="p">,</span>
+    <span class="s1">'14'</span><span class="o">:</span> <span class="mf">0.05263157894736842</span><span class="p">,</span>
+    <span class="s1">'15'</span><span class="o">:</span> <span class="mf">0.05263157894736842</span><span class="p">,</span>
+    <span class="s1">'18'</span><span class="o">:</span> <span class="mf">0.05263157894736842</span><span class="p">,</span>
+    <span class="s1">'-11'</span><span class="o">:</span> <span class="mf">0.05263157894736842</span><span class="p">,</span>
+    <span class="s1">'-10'</span><span class="o">:</span> <span class="mf">0.05263157894736842</span><span class="p">,</span>
+    <span class="s1">'-8'</span><span class="o">:</span> <span class="mf">0.15789473684210525</span><span class="p">,</span>
+    <span class="s1">'-7'</span><span class="o">:</span> <span class="mf">0.05263157894736842</span><span class="p">,</span>
+    <span class="s1">'-6'</span><span class="o">:</span> <span class="mf">0.05263157894736842</span><span class="p">,</span>
+    <span class="s1">'-4'</span><span class="o">:</span> <span class="mf">0.10526315789473684</span>
+  <span class="p">}</span>
+</pre></div>
+
+<h4>Vector.copy</h4>
+
+<pre><code>.copy(callback)
+</code></pre>
+
+<p>Returns a copy of the data set.</p>
+
+<h4>Vector.clone</h4>
+
+<pre><code>.clone(callback)
+</code></pre>
+
+<p>Returns another instance of the Vector object and data.</p>
+
+<h3>Math</h3>
+
+<p><code>Vector</code> supports applying all the <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Math#Methods">Math</a> object methods to an entire Vector set of numbers.</p>
+
+<p>For example, applying <code>pow</code> primitive method on a set to calculate the quadratic mean</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">squares</span> <span class="o">=</span> <span class="nx">set</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span> <span class="c1">// A Vector of set's members squared</span>
+<span class="o">&gt;</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">441</span><span class="p">]</span>
+<span class="nb">Math</span><span class="p">.</span><span class="nx">sqrt</span><span class="p">(</span><span class="nx">squares</span><span class="p">.</span><span class="nx">sum</span><span class="p">()</span> <span class="o">/</span> <span class="nx">squares</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span> <span class="c1">// Sum the squares -&gt; find average -&gt; quadratic mean (RMS)</span>
+<span class="o">&gt;</span> <span class="mf">9.797958971132712</span>
+</pre></div>
+
+<h3>TimeSeries</h3>
+
+<p>Perform time series analysis. TimeSeries currently accepts time in epoch milliseconds followed by a numeric value.</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">gauss</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'gauss'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">set</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">gauss</span><span class="p">.</span><span class="nx">TimeSeries</span><span class="p">([</span><span class="mi">1315378833000</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">],</span> <span class="p">[</span><span class="mi">1315789015000</span><span class="p">,</span> <span class="mf">7.826</span><span class="p">]);</span>
+</pre></div>
+
+<h4>TimeSeries.times</h4>
+
+<pre><code>.times(callback)
+</code></pre>
+
+<p>Returns a Vector of the times.</p>
+
+<h4>TimeSeries.values</h4>
+
+<pre><code>.values(callback)
+</code></pre>
+
+<p>Returns a Vector of the time series values.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/stackd">stackd</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
